@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ContentFlow AI — Desktop Prototype</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="toast" class="toast"></div>
+
+  <main id="welcomeScreen" class="auth-screen splash-screen">
+    <button class="ghost-back" aria-label="Back">‹</button>
+    <div class="splash-shape splash-shape-one"></div>
+    <div class="splash-shape splash-shape-two"></div>
+    <section class="splash-card">
+      <img src="assets/logo.svg" class="splash-logo" alt="ContentFlow AI logo" />
+      <h1>ContentFlow <span>AI</span></h1>
+      <p class="subtitle">Your AI Content Planning Assistant</p>
+      <div class="decor-line"><span></span><b></b><span></span></div>
+      <p class="tagline">Plan smarter. Create faster.<br />Grow stronger with AI.</p>
+      <button class="primary large" data-go-auth="loginScreen">Get Started</button>
+      <button class="secondary large" data-login-demo>Continue as Guest</button>
+      <div class="dots"><i class="active"></i><i></i><i></i></div>
+    </section>
+  </main>
+
+  <main id="loginScreen" class="auth-screen hidden">
+    <button class="ghost-back" data-go-auth="welcomeScreen" aria-label="Back">‹</button>
+    <section class="login-card">
+      <img src="assets/logo.svg" class="login-logo" alt="ContentFlow AI logo" />
+      <h1>ContentFlow <span>AI</span></h1>
+      <p class="subtitle">Your AI Content Planning Assistant</p>
+      <h2>Welcome back!</h2>
+      <p class="muted center">Log in to continue creating amazing content.</p>
+      <label class="input-field"><span>✉</span><input id="emailInput" type="email" placeholder="Email address" value="aanya.sharma@email.com" /></label>
+      <label class="input-field"><span>🔒</span><input id="passwordInput" type="password" placeholder="Password" value="contentflow" /><button type="button" id="togglePassword">👁</button></label>
+      <a class="small-link" href="#">Forgot password?</a>
+      <button class="primary large" data-login-demo>Log In</button>
+      <div class="divider"><span></span>or continue with<span></span></div>
+      <div class="social-row">
+        <button>G&nbsp; Google</button>
+        <button>f&nbsp; Facebook</button>
+        <button>&nbsp; Apple</button>
+      </div>
+      <p class="signup-text">Don’t have an account? <b>Sign up</b></p>
+    </section>
+  </main>
+
+  <div id="appShell" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <img src="assets/logo.svg" alt="ContentFlow AI" />
+        <div><strong>ContentFlow <span>AI</span></strong><small>Content Partner</small></div>
+      </div>
+      <nav class="side-nav" id="sideNav">
+        <button data-page="dashboard" class="active"><span>⌂</span>Dashboard</button>
+        <button data-page="ideas"><span>💡</span>AI Ideas</button>
+        <button data-page="caption"><span>✎</span>Caption Studio</button>
+        <button data-page="schedule"><span>▦</span>Schedule</button>
+        <button data-page="plan"><span>✓</span>Final Plan</button>
+        <button data-page="feedback" class="locked" title="Available after posting"><span>♡</span>Feedback</button>
+        <button data-page="analytics"><span>▥</span>Analytics</button>
+        <button data-page="profile"><span>☻</span>Profile</button>
+      </nav>
+      <div class="side-card">
+        <small>Current workflow</small>
+        <strong id="sideStage">Input setup</strong>
+        <div class="mini-progress"><i></i></div>
+        <p>Human review stays active before final posting.</p>
+      </div>
+      <button class="logout-btn" id="logoutBtn">Log out</button>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div>
+          <small id="sectionEyebrow">Human–AI Content Planning</small>
+          <h1 id="sectionTitle">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Search ideas, captions, schedules" /></label>
+          <button class="icon-btn" title="Notifications">🔔<i></i></button>
+          <img src="assets/avatar.jpg" alt="Profile" class="avatar" data-page-shortcut="profile" />
+        </div>
+      </header>
+
+      <section class="stage-strip" id="stageStrip">
+        <button data-stage="input" class="active"><b>1</b>Input</button>
+        <button data-stage="ideas"><b>2</b>AI Ideas</button>
+        <button data-stage="review"><b>3</b>Review</button>
+        <button data-stage="schedule"><b>4</b>Schedule</button>
+        <button data-stage="output"><b>5</b>Output</button>
+        <button data-stage="feedback"><b>6</b>Feedback</button>
+      </section>
+
+      <main class="page-container">
+        <section class="page active" id="page-dashboard">
+          <div class="hero-grid">
+            <article class="hero-panel card">
+              <div class="hero-copy">
+                <span class="pill soft">AI Content Planning Assistant</span>
+                <h2>Good morning, Alex! 👋</h2>
+                <p>Start with goals and preferences. The AI suggests ideas, but you approve edits, schedules, and final posting.</p>
+                <div class="prompt-box">
+                  <input id="promptInput" placeholder="e.g., Instagram post ideas for a coffee shop" value="Instagram post ideas for a coffee shop" />
+                  <button class="primary square" id="promptGenerate">✦</button>
+                </div>
+                <div class="quick-actions">
+                  <button data-page-shortcut="ideas"><span>💡</span>Generate Ideas</button>
+                  <button data-page-shortcut="caption"><span>💬</span>Create Caption</button>
+                  <button data-page-shortcut="schedule"><span>📅</span>Plan Schedule</button>
+                </div>
+              </div>
+              <div class="hero-visual">
+                <img src="assets/robot.svg" alt="AI helper" />
+                <div class="floating-note"><b>Best Time</b><span>Today at 7:00 PM</span></div>
+              </div>
+            </article>
+
+            <aside class="card side-insight">
+              <div class="section-head compact">
+                <div><h3>Process Status</h3><p>The system follows the human-approved flow.</p></div>
+              </div>
+              <div class="status-list">
+                <div class="done"><b>✓</b><span>Goals and audience set</span></div>
+                <div class="done"><b>✓</b><span>AI can generate suggestions</span></div>
+                <div><b>3</b><span>Waiting for idea approval</span></div>
+                <div><b>4</b><span>Schedule after caption review</span></div>
+                <div><b>5</b><span>Feedback opens after posting</span></div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="section-head"><div><h3>AI Suggestions For You</h3><p>Recommended from your saved preferences.</p></div><button class="text-btn" data-page-shortcut="ideas">See all ›</button></div>
+          <div class="suggestion-grid">
+            <article class="suggestion-card card"><span class="icon purple">↗</span><h4>Trending Ideas</h4><p>5 viral content ideas for your niche</p><button data-page-shortcut="ideas">View ideas ›</button></article>
+            <article class="suggestion-card card"><span class="icon blue">#</span><h4>Trending Hashtags</h4><p>Top hashtags this week</p><button data-page-shortcut="caption">View hashtags ›</button></article>
+            <article class="suggestion-card card"><span class="icon green">◷</span><h4>Best Time to Post</h4><p>Today at 7:00 PM</p><button data-page-shortcut="schedule">View calendar ›</button></article>
+          </div>
+
+          <div class="two-col overview-row">
+            <article class="card">
+              <div class="section-head compact"><div><h3>Quick Overview</h3><p>This week</p></div><button class="chip active">This Week</button></div>
+              <div class="metric-grid">
+                <div><span>💡</span><b>24</b><small>Ideas Generated</small><em>↑ 12%</em></div>
+                <div><span>💬</span><b>12</b><small>Posts Created</small><em>↑ 8%</em></div>
+                <div><span>📅</span><b>7</b><small>Scheduled</small><em>↑ 5%</em></div>
+                <div><span>▥</span><b>85%</b><small>Engagement Score</small><em>↑ 10%</em></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="section-head compact"><div><h3>Upcoming Schedule</h3><p>Next approved content</p></div><button class="text-btn" data-page-shortcut="schedule">View calendar ›</button></div>
+              <div class="schedule-list compact-list">
+                <div><img src="assets/coffee.jpg" alt="Coffee post" /><div><b>Morning Coffee Vibes</b><span>May 23, 2025 • 7:00 PM</span><small>Scheduled</small></div><button>⋮</button></div>
+                <div><img src="assets/cafe.jpg" alt="Cafe post" /><div><b>Behind the Scenes</b><span>May 24, 2025 • 9:00 AM</span><small>Draft</small></div><button>⋮</button></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" id="page-ideas">
+          <div class="section-head page-head"><div><h2>AI Generated Ideas ✨</h2><p>AI suggestions based on your niche, platform, goal, tone, and audience.</p></div><button class="secondary" id="editPrefsBtn">✎ Edit Inputs</button></div>
+          <div class="preference-card card">
+            <div><span class="social instagram">◎</span><small>Platform</small><b id="prefPlatform">Instagram</b></div>
+            <div><span class="green icon-mini">◎</span><small>Goal</small><b>Brand Awareness</b></div>
+            <div><span class="blue icon-mini">👥</span><small>Audience</small><b>Coffee Lovers 18–35</b></div>
+            <div><span class="gold icon-mini">☺</span><small>Tone</small><b>Friendly, Warm & Casual</b></div>
+          </div>
+          <div class="tabs"><button class="active">✦ All Ideas</button><button>▧ Image Post</button><button>▦ Carousel</button><button>▷ Reel</button><button>◌ Story</button></div>
+          <div id="ideasList" class="idea-list"></div>
+          <div class="callout card"><div><b>✦ These ideas are generated from your inputs.</b><p>You can edit, reject, use, or request another set before moving forward.</p></div><button class="secondary" id="generateMoreIdeas">↻ Generate More</button></div>
+        </section>
+
+        <section class="page" id="page-caption">
+          <div class="section-head page-head"><div><h2>Generate Caption ✨</h2><p>Review AI-crafted captions before moving to scheduling.</p></div><button class="secondary" data-page-shortcut="ideas">← Back to Ideas</button></div>
+          <article class="selected-card card">
+            <img id="captionImage" src="assets/coffee.jpg" alt="Selected idea" />
+            <div><small>Selected Idea</small><h3 id="captionIdeaTitle">Morning Coffee Vibes ☕</h3><p id="captionIdeaDesc">A bright and cozy post featuring your espresso blend to start the day right.</p></div>
+            <button class="secondary" data-page-shortcut="ideas">✎ Change Idea</button>
+          </article>
+          <div class="two-col caption-layout">
+            <article class="card caption-card">
+              <div class="section-head compact"><div><h3>AI Generated Caption</h3><p>Human approval required</p></div><button class="secondary" id="regenerateCaption">↻ Regenerate</button></div>
+              <textarea id="captionText"></textarea>
+              <div class="caption-actions"><button class="secondary" id="copyCaption">□ Copy</button><button class="secondary" id="polishCaption">✎ Polish</button></div>
+              <h3 class="subhead"># Hashtags <small>(AI Suggested)</small></h3>
+              <div id="hashtagBox" class="chip-row"></div>
+              <button class="text-btn" id="editHashtags">✎ Edit hashtags</button>
+            </article>
+            <aside class="card preview-card">
+              <div class="section-head compact"><div><h3>Platform Preview</h3><p>Choose a channel preview.</p></div></div>
+              <div class="platform-tabs" id="platformTabs"><button class="active" data-platform="Instagram">◎ Instagram</button><button data-platform="Facebook">f Facebook</button><button data-platform="TikTok">♪ TikTok</button><button data-platform="LinkedIn">in LinkedIn</button></div>
+              <div class="post-preview"><div><img id="previewImage" src="assets/coffee.jpg" alt="Post preview" /></div><div><b>contentflow_ai</b><p id="previewCaption"></p></div></div>
+              <button class="primary full" id="saveCaption">Save Caption</button>
+              <button class="secondary full" data-page-shortcut="schedule">Next: Plan Schedule →</button>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page" id="page-schedule">
+          <div class="section-head page-head"><div><h2>Plan Schedule 📅</h2><p>Choose where and when to post your approved content.</p></div><button class="secondary" data-page-shortcut="caption">← Back to Caption</button></div>
+          <article class="selected-card card">
+            <img src="assets/coffee.jpg" alt="Selected content" />
+            <div><small>Selected Content</small><h3 id="scheduleTitle">Morning Coffee Vibes ☕</h3><p id="scheduleSnippet">Good coffee. Good mood. Good day. Start your morning with our signature espresso blend.</p></div>
+            <button class="secondary" data-page-shortcut="caption">✎ Edit</button>
+          </article>
+          <section class="card schedule-card">
+            <h3>1. Choose Platform</h3>
+            <div class="platform-grid" id="schedulePlatforms"><button class="selected">◎<b>Instagram</b></button><button>f<b>Facebook</b></button><button>♪<b>TikTok</b></button><button>in<b>LinkedIn</b></button><button>•••<b>More</b></button></div>
+            <h3>2. Choose Date & Time</h3>
+            <div class="schedule-picker">
+              <div class="calendar-box"><div class="calendar-top"><button>‹</button><b>May 2025</b><button>›</button></div><div class="calendar-grid" id="calendarGrid"></div></div>
+              <div class="time-box"><b>Select Time</b><small>Best times to post</small><div id="timeSlots" class="time-slots"></div></div>
+            </div>
+            <div class="recommendation"><span>✦</span><div><b>AI Recommendation</b><p>Friday at 7:00 PM gets the most engagement for your audience on Instagram.</p></div><button class="secondary" id="useRecommended">Use Recommended</button></div>
+            <h3>3. Additional Settings</h3>
+            <div class="settings-list">
+              <label><span>↻</span><div><b>Repeat Post</b><small>Reuse this content</small></div><input type="checkbox" /></label>
+              <label><span>🏷</span><div><b>Add Labels</b><small>Campaign, promotion, event, etc.</small></div><input type="text" placeholder="Optional label" /></label>
+              <label><span>🔔</span><div><b>Add Reminder</b><small>Get notified before posting</small></div><input type="checkbox" checked /></label>
+            </div>
+            <button class="primary full big" id="schedulePost">📅 Schedule Post</button>
+          </section>
+        </section>
+
+        <section class="page" id="page-plan">
+          <div class="section-head page-head"><div><h2>Content Plan Ready! 🎉</h2><p>Final human-approved content plan before posting.</p></div><button class="secondary" data-page-shortcut="schedule">✎ Edit Plan</button></div>
+          <article class="plan-hero card">
+            <img src="assets/coffee.jpg" alt="Final content" />
+            <div><span class="pill">◎ Instagram Post</span><h2 id="finalTitle">Morning Coffee Vibes ☕</h2><span class="pill soft">Scheduled</span><div class="plan-meta"><span><small>Date & Time</small><b id="finalDateTime">May 23, 2025 • 7:00 PM</b></span><span><small>Goal</small><b>Brand Awareness</b></span><span><small>Audience</small><b>Coffee Lovers 18–35</b></span></div></div>
+          </article>
+          <div class="two-col plan-grid">
+            <article class="card"><div class="section-head compact"><div><h3>Content Preview</h3><p>Approved caption and hashtags.</p></div><button class="secondary" id="copyFinal">□ Copy</button></div><div id="finalCaption" class="final-caption"></div></article>
+            <aside class="card insights-card"><div class="section-head compact"><div><h3>AI Insights</h3><p>Prediction before posting.</p></div><span class="pill green-pill">High Impact</span></div><div class="impact-box">↗ <b>This post is predicted to get 28% more engagement</b> based on your audience activity.</div><ul class="detail-list"><li><span>◷</span><b>Best time to post today</b><small id="insightTime">7:00 PM – 9:00 PM</small></li><li><span>#</span><b>Top performing hashtag</b><small>#morningBoost</small></li><li><span>▥</span><b>Engagement potential</b><small>High</small></li></ul></aside>
+          </div>
+          <div class="success-banner"><span>✓</span><div><b>All set! Your post is scheduled.</b><p>When you mark it as posted, the system will open feedback and performance monitoring.</p></div><button class="secondary" data-page-shortcut="schedule">View Calendar</button><button class="primary" id="postNow">Post / Export Content</button></div>
+        </section>
+
+        <section class="page" id="page-feedback">
+          <div class="feedback-lock" id="feedbackLock">
+            <div class="card empty-state"><img src="assets/robot.svg" alt="Robot" /><h2>Feedback opens after posting.</h2><p>This matches the workflow: post/export first, then monitor performance and collect user feedback.</p><button class="primary" data-page-shortcut="plan">Go to Final Plan</button></div>
+          </div>
+          <div class="feedback-content hidden" id="feedbackContent">
+            <div class="feedback-hero"><div><h2>How did we do? ✨</h2><p>Your feedback helps AI generate better content for the next cycle.</p></div><img src="assets/robot.svg" alt="AI bot" /></div>
+            <article class="selected-card card"><img src="assets/coffee.jpg" alt="Posted content" /><div><small>Summary of your content</small><h3>Morning Coffee Vibes ☕</h3><p>Instagram Post • May 23, 2025 • 7:00 PM</p><p>Good coffee. Good mood. Good day. Start your morning with our signature espresso blend...</p></div><button class="secondary" data-page-shortcut="plan">View Plan</button></article>
+            <article class="card feedback-card"><h3>1. Overall, how satisfied are you with this content?</h3><div class="star-row" id="starRow"><button data-star="1">★<small>Very Dissatisfied</small></button><button data-star="2">★<small>Dissatisfied</small></button><button data-star="3">★<small>Neutral</small></button><button data-star="4" class="active">★<small>Satisfied</small></button><button data-star="5">☆<small>Very Satisfied</small></button></div></article>
+            <article class="card feedback-card"><h3>2. What did you like most?</h3><div class="choice-grid multi"><button>💡 Ideas</button><button class="active">✎ Caption</button><button># Hashtags</button><button class="active">📅 Scheduling</button><button>▥ AI Insights</button><button>☺ Overall Experience</button></div></article>
+            <article class="card feedback-card"><h3>3. What can we improve?</h3><div class="choice-grid multi"><button>More creative ideas</button><button>Better captions</button><button class="active">More relevant hashtags</button><button>Scheduling options</button><button>More platform options</button><button>Other</button></div></article>
+            <article class="card feedback-card"><h3>4. Anything else you’d like to share?</h3><textarea id="feedbackText">The captions are great! Would love more niche-specific hashtag suggestions in the future.</textarea></article>
+            <div class="success-banner purple"><span>🧠</span><div><b>Help AI learn your preferences</b><p>Your feedback updates future tone, hashtag, and scheduling recommendations.</p></div><button class="primary" id="submitFeedback">Submit Feedback</button></div>
+          </div>
+        </section>
+
+        <section class="page" id="page-analytics">
+          <div class="section-head page-head"><div><h2>Analytics</h2><p>AI monitors post performance and turns feedback into better recommendations.</p></div><button class="secondary" data-page-shortcut="feedback">Give Feedback</button></div>
+          <div class="metric-grid analytics-metrics"><div class="card"><span>▥</span><b>85%</b><small>Engagement Score</small><em>↑ 10%</em></div><div class="card"><span>♡</span><b>4.2</b><small>Average Rating</small><em>Good</em></div><div class="card"><span>#</span><b>28%</b><small>Hashtag Lift</small><em>Projected</em></div><div class="card"><span>◷</span><b>7 PM</b><small>Best Time</small><em>Confirmed</em></div></div>
+          <div class="two-col">
+            <article class="card"><h3>Engagement Trend</h3><div class="bar-chart"><div style="height:42%"><span>Mon</span></div><div style="height:55%"><span>Tue</span></div><div style="height:48%"><span>Wed</span></div><div style="height:72%"><span>Thu</span></div><div style="height:88%"><span>Fri</span></div><div style="height:64%"><span>Sat</span></div><div style="height:76%"><span>Sun</span></div></div></article>
+            <article class="card"><h3>AI Learning Notes</h3><ul class="learning-list"><li><b>Caption tone</b><span>Friendly, warm, and short hooks perform better.</span></li><li><b>Hashtags</b><span>Use more niche-specific coffee tags.</span></li><li><b>Timing</b><span>Evening slots remain strongest for Instagram.</span></li><li><b>Human review</b><span>User edits are saved as future style preference.</span></li></ul></article>
+          </div>
+        </section>
+
+        <section class="page" id="page-profile">
+          <div class="section-head page-head"><div><h2>Profile & Settings ⚙</h2><p>Manage profile, preferences, connected platforms, and app settings.</p></div></div>
+          <article class="profile-hero card"><img src="assets/avatar.jpg" alt="Aanya profile" /><div><h2>Aanya Sharma <span class="pill">♛ Pro</span></h2><p>aanya.sharma@email.com</p><p>Content Creator & Coffee Lover ☕</p><button class="secondary">✎ Edit Profile</button></div><div class="profile-stats"><span><small>Member since</small><b>Jan 2025</b></span><span><small>Plan</small><b>Pro Plan</b><button class="text-btn">Manage Plan ›</button></span></div></article>
+          <div class="two-col profile-grid">
+            <article class="card"><h3>AI Preferences</h3><p class="muted">Help AI understand your style and goals better.</p><div class="pref-list"><button><span>◎</span><b>Content Goals</b><small>Brand Awareness, Engagement</small><em>›</em></button><button><span>👥</span><b>Target Audience</b><small>Coffee Lovers, 18–35 years</small><em>›</em></button><button><span>☺</span><b>Tone of Voice</b><small>Friendly, Warm & Casual</small><em>›</em></button><button><span>🏷</span><b>Keywords / Themes</b><small>Coffee, Lifestyle, Motivation</small><em>›</em></button><button><span>✦</span><b>Content Style</b><small>Informative, Inspiring, Relatable</small><em>›</em></button></div><button class="secondary full">✦ Update AI Preferences</button></article>
+            <article class="card"><h3>App Settings</h3><div class="settings-list clean"><label><span>🔔</span><div><b>Notifications</b></div><input type="checkbox" checked /></label><label><span>✉</span><div><b>Email Updates</b></div><input type="checkbox" checked /></label><label><span>▯</span><div><b>Push Notifications</b></div><input type="checkbox" checked /></label><label><span>☾</span><div><b>Dark Mode</b></div><input id="darkModeToggle" type="checkbox" /></label><label><span>🌐</span><div><b>Language</b></div><small>English ›</small></label><label><span>🛡</span><div><b>Privacy Policy</b></div><small>›</small></label></div></article>
+          </div>
+          <article class="card"><div class="section-head compact"><div><h3>Connected Platforms</h3><p>Manage your social media accounts.</p></div><button class="secondary">+ Connect New</button></div><div class="platform-table"><div><b>◎ Instagram</b><span>@aanya.creates</span><small>Connected</small><button>⋮</button></div><div><b>f Facebook Page</b><span>Aanya Creates</span><small>Connected</small><button>⋮</button></div><div><b>♪ TikTok</b><span>@aanya.creates</span><small>Connected</small><button>⋮</button></div><div><b>in LinkedIn</b><span>Aanya Sharma</span><small class="neutral">Not Connected</small><button>Connect</button></div></div></article>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
